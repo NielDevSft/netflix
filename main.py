@@ -10,6 +10,7 @@ def getServiceOpened():
             coords = pyautogui.locateCenterOnScreen('skip_youtube_image.png', confidence=.8)
         except:
             coords = pyautogui.locateCenterOnScreen('keep_watchin.png', confidence=.8)
+            coords = None #ainda não funciona
             
         if coords: 
             print('Youtube aberto!')
