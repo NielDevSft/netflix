@@ -27,7 +27,7 @@ def skip():
     if coordsNService[0] is not None:
         pyautogui.moveTo(coordsNService[0])
         pyautogui.click()
-        print('Abertura do '+ str(coordsNService[1]) + ' pulada')    
+        print('Abertura do '+ str(serviceList[coordsNService[1]]) + ' pulada')    
     else:
         print('Por hora não achei nada. ;>')
         time.sleep(1)
