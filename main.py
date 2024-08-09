@@ -1,19 +1,36 @@
 import pyautogui
 import time
+serviceList= ["youtube", "netflix"]
 
+def getServiceOpened():
+    serviceSelected= None
+    coords = None
+    try:
+        coords = pyautogui.locateCenterOnScreen('skip_youtube_image.png', confidence=.8)
+        if coords: 
+            print('Youtube aberto!')
+            serviceSelected = 0
+    except pyautogui.ImageNotFoundException:
+        try:
+            # aguardando print
+            # coords = pyautogui.locateCenterOnScreen('skip_netflix_image.png', confidence=.8)
+            if coords: 
+                print('Youtube aberto!')
+                serviceSelected = 1
+        except pyautogui.ImageNotFoundException:
+            print('Nada aberto!')
+    return [coords, serviceSelected]
 
 def skip():
-    try:
-        some_image = pyautogui.locateCenterOnScreen('some_image.png', confidence=.8)
-        time.sleep(.25)
-        if some_image:
-            pyautogui.moveTo(full_img_hbo)
-            pyautogui.click()
-            print('Back to fullscreen!')
-        
-    except ImageNotFoundException:
-        print('OSError Excepted')
-        time.sleep(.25)
+    
+    coordsNService = getServiceOpened()
+    if coordsNService[0] is not None:
+        pyautogui.moveTo(coordsNService[0])
+        pyautogui.click()
+        print('Abertura do '+ str(coordsNService[1]) + ' pulada')    
+    else:
+        print('Por hora não achei nada. ;>')
+        time.sleep(1)
 
 
 while True:
