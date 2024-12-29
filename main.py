@@ -1,6 +1,6 @@
 import pyautogui
 import time
-serviceList= ["youtube", "netflix"]
+serviceList= ["youtube", "netflix", "mercado_play"]
 
 def getServiceOpened():
     serviceSelected= None
@@ -8,22 +8,19 @@ def getServiceOpened():
     try:
         try:
             coords = pyautogui.locateCenterOnScreen('skip_youtube_image.png', confidence=.8)
-        except:
-            coords = pyautogui.locateCenterOnScreen('keep_watchin.png', confidence=.8)
-            coords = None #ainda não funciona
-            
-        if coords: 
             print('Youtube aberto!')
             serviceSelected = 0
+        except:
+            try:
+                coords = pyautogui.locateCenterOnScreen('skip_mercado_play.png', confidence=.8)
+                print('Mercado play aberto!')
+                serviceSelected = 2
+            except pyautogui.ImageNotFoundException:
+                print('Nada aberto!')
+        
+            
     except pyautogui.ImageNotFoundException:
-        try:
-            # aguardando print
-            # coords = pyautogui.locateCenterOnScreen('skip_netflix_image.png', confidence=.8)
-            if coords: 
-                print('Youtube aberto!')
-                serviceSelected = 1
-        except pyautogui.ImageNotFoundException:
-            print('Nada aberto!')
+        print('Nada aberto!')
     return [coords, serviceSelected]
 
 def skip():
